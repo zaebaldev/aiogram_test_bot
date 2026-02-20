@@ -1,6 +1,6 @@
 import asyncio
 from aiogram import Bot, Dispatcher, types
-from aiogram.filters import CommandStart
+from aiogram.filters import Command, CommandStart
 import dotenv
 import os
 
@@ -10,6 +10,11 @@ TOKEN = os.getenv("secret")
 
 bot = Bot(token=str(TOKEN))
 dp = Dispatcher()
+
+
+@dp.message(Command("info"))
+async def info_cmd(message: types.Message):
+    await message.answer("This is test aiogram bot")
 
 
 @dp.message(CommandStart())
