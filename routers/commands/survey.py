@@ -32,6 +32,7 @@ async def process_name(
     await message.answer(
         text=f"Your name is {message.text}",
     )
+    await state.update_data({"name": message.text})
     await state.set_state(Form.surname)
 
 
@@ -40,6 +41,22 @@ async def process_surname(
     message: Message,
     state: FSMContext,
 ) -> None:
+    await state.update_data({"surname": message.text})
+    await state.set_state(Form.age)
     await message.answer(
         text=f"Your surname is {message.text}",
     )
+
+
+@router.message(Form.age)
+async def process_age(
+    message: Message,
+    state: FSMContext,
+) -> None:
+    await state.update_data({"age": message.text})
+    name = await state.get_value("name")
+    surname = await state.get_value("surname")
+    await message.answer(
+        text=f"Your name is {name}\n Your surname is {surname}\nYour age is {message.text}",
+    )
+    await state.clear()
