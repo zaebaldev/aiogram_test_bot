@@ -5,7 +5,7 @@ router = Router()
 
 
 @router.callback_query(F.data == "1")
-async def handle_callback_data(callback: CallbackQuery):
+async def handle_callback_data1(callback: CallbackQuery):
     await callback.message.answer(
         text="You pressed first button",
     )
@@ -13,7 +13,7 @@ async def handle_callback_data(callback: CallbackQuery):
 
 
 @router.callback_query(F.data == "2")
-async def handle_callback_data(callback: CallbackQuery):
+async def handle_callback_data2(callback: CallbackQuery):
     await callback.message.answer(
         text="You pressed second button",
     )
