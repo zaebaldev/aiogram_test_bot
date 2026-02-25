@@ -4,6 +4,7 @@ from keyboards.start import get_start_kb
 from aiogram.types.inline_keyboard_markup import InlineKeyboardMarkup
 from aiogram.types.inline_keyboard_button import InlineKeyboardButton
 
+
 router = Router()
 
 
@@ -32,9 +33,11 @@ async def info_cmd(message: types.Message):
 
 
 @router.message(CommandStart())
-async def start_cmd(message: types.Message):
-
+async def start_cmd(
+    message: types.Message,
+):
+    greeding = f"Hi, {message.from_user.full_name} {message.from_user.id}"
     await message.answer(
-        text=f"Hi, {message.from_user.full_name} {message.from_user.id}",
+        text=greeding,
         reply_markup=get_start_kb(),
     )
