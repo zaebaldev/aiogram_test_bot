@@ -9,11 +9,15 @@ bot = Bot(token=TOKEN)
 dp = Dispatcher()
 
 log = logging.getLogger(__name__)
+users = {
+    1: "Alimjan",
+    2: "Sultan",
+}
 
 
 async def main():
     logging.basicConfig(
-        level=logging.INFO,
+        level=logging.DEBUG,
     )
     log.debug(f"token {TOKEN}")
     cmd1 = BotCommand(
