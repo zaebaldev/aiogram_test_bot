@@ -59,3 +59,31 @@ async def users_cmd(message: types.Message):
         await message.answer(
             text=f"{user[0]}",
         )
+
+
+@router.message(Command("delete"))
+async def delete_cmd(message: types.Message):
+    user_id = message.text.split()[1]
+    cursor.execute(
+        "DELETE FROM users WHERE id=(?)",
+        (user_id),
+    )
+    conn.commit()
+    conn.close()
+    await message.answer(
+        text="User deleted successfully",
+    )
+
+
+@router.message(Command("update_name"))
+async def update_username_cmd(message: types.Message):
+    user_id = message.text.split()[1]
+    new_username = message.text.split()[2]
+    cursor.execute(
+        "UPDATE users SET username=(?) WHERE id=(?);", (new_username, user_id)
+    )
+    conn.commit()
+    conn.close()
+    await message.answer(
+        text="User updated successfully",
+    )
